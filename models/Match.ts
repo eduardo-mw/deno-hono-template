@@ -7,8 +7,29 @@ interface MatchDocument extends Match, Document {}
 const matchSchema = new Schema<MatchDocument>({
   player1Id: String,
   player2Id: String,
-  player1Score: { type: Number, default: 0 },
-  player2Score: { type: Number, default: 0 },
+  player1Score: {
+    type: Number,
+    default: 0,
+    min: [0, "Score cannot be less than 0"],
+    max: [500, "Score cannot be greater than 500"],
+  },
+  player2Score: {
+    type: Number,
+    default: 0,
+    min: [0, "Score cannot be less than 0"],
+    max: [500, "Score cannot be greater than 500"],
+  },
+  // Status numbers are
+  // 0 - Not started
+  // 1 - In progress
+  // 2 - Paused
+  // 3 - Completed
+  status: {
+    type: Number,
+    default: 0,
+    min: [0, "Status cannot be less than 0"],
+    max: [3, "Status cannot be greater than 3"],
+  },
 });
 
 // Validations

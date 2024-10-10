@@ -11,4 +11,5 @@ export interface Match {
   player2Id: string;
   player1Score: number;
   player2Score: number;
+  status: number;
 }
