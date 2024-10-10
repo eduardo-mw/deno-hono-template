@@ -14,7 +14,10 @@ const playerSchema = new Schema<PlayerDocument>({
 
 // Validations
 playerSchema.path("name").required(true, "Player name cannot be blank.");
-playerSchema.path("displayName").required(true, "Player display name cannot be blank.");
+playerSchema.path("displayName").required(
+  true,
+  "Player display name cannot be blank.",
+);
 
 // Export model.
 export default model<PlayerDocument>("Player", playerSchema);

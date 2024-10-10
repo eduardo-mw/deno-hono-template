@@ -29,7 +29,6 @@ players.post("/", async (c) => {
       return c.json({ "error": error.message });
     }
   }
-  
 });
 
 export default players;
