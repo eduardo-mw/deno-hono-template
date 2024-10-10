@@ -1,5 +1,5 @@
 import { Document, model, Schema } from "mongoose";
-import { Player } from "../types/Player.d.ts";
+import { Player } from "../types/Game.d.ts";
 
 interface PlayerDocument extends Player, Document {}
 

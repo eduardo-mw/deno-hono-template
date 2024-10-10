@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import PlayerModel from "../models/Player.ts";
-import { Player } from "../types/Player.d.ts";
+import { Player } from "../types/Game.d.ts";
 const players = new Hono();
 
 // GET all players
