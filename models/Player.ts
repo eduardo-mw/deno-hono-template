@@ -1,7 +1,10 @@
-import { model, Schema } from "mongoose";
+import { Document, model, Schema } from "mongoose";
+import { Player } from "../types/Player.d.ts";
+
+interface PlayerDocument extends Player, Document {}
 
 // Define schema.
-const playerSchema = new Schema({
+const playerSchema = new Schema<PlayerDocument>({
   name: String,
   displayName: { type: String, unique: true },
   iconUrl: String,
@@ -11,8 +14,7 @@ const playerSchema = new Schema({
 
 // Validations
 playerSchema.path("name").required(true, "Player name cannot be blank.");
-playerSchema.path("displayName").required(true, "Player name cannot be blank.");
-
+playerSchema.path("displayName").required(true, "Player display name cannot be blank.");
 
 // Export model.
-export default model("Player", playerSchema);
+export default model<PlayerDocument>("Player", playerSchema);
