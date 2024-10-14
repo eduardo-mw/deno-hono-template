@@ -2,15 +2,28 @@ GET http://localhost:8000/players HTTP/1.1
 
 ###
 
+GET http://localhost:8000/players/<id> HTTP/1.1
+
+###
+
 POST http://localhost:8000/players HTTP/1.1
 content-type: application/json
 
 {
     "name": "John Doe",
-    "displayName": "jd",
-    "iconUrl" : "https://www.google.com"
+    "displayName": "jd001"
 }
 
 ###
 
 GET http://localhost:8000/matches HTTP/1.1
+
+###
+
+POST http://localhost:8000/matches HTTP/1.1
+content-type: application/json
+
+{
+    "player1Id": "<id>",
+    "player2Id": "<id>"
+}
