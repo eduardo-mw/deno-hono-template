@@ -1,13 +1,19 @@
-import { Document, model, Schema } from "mongoose";
-import { Player } from "../types/Game.d.ts";
+import { model, Schema } from "mongoose";
 
-interface PlayerDocument extends Player, Document {}
+// Define Interface
+export interface IPlayer {
+  name: string;
+  displayName: string;
+  iconUrl?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 // Define schema.
-const playerSchema = new Schema<PlayerDocument>({
+const playerSchema = new Schema<IPlayer>({
   name: String,
   displayName: { type: String, unique: true },
-  iconUrl: String,
+  iconUrl: { type: String, default: "https://placehold.co/128x128.webp" },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
@@ -19,5 +25,6 @@ playerSchema.path("displayName").required(
   "Player display name cannot be blank.",
 );
 
-// Export model.
-export default model<PlayerDocument>("Player", playerSchema);
+const PlayerModel = model("Player", playerSchema);
+
+export default PlayerModel;

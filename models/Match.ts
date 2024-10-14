@@ -1,12 +1,18 @@
-import { Document, model, Schema } from "mongoose";
-import { Match } from "../types/Game.d.ts";
+import { model, Schema, Types } from "mongoose";
 
-interface MatchDocument extends Match, Document {}
+// Define Interface
+export interface IMatch {
+  player1Id: Types.ObjectId;
+  player2Id: Types.ObjectId;
+  player1Score?: number;
+  player2Score?: number;
+  status?: number;
+}
 
 // Define schema.
-const matchSchema = new Schema<MatchDocument>({
-  player1Id: String,
-  player2Id: String,
+const matchSchema = new Schema<IMatch>({
+  player1Id: { type: Schema.Types.ObjectId, ref: "Player" },
+  player2Id: { type: Schema.Types.ObjectId, ref: "Player" },
   player1Score: {
     type: Number,
     default: 0,
@@ -37,4 +43,4 @@ matchSchema.path("player1Id").required(true, "player1Id name cannot be blank.");
 matchSchema.path("player2Id").required(true, "player2Id name cannot be blank.");
 
 // Export model.
-export default model<MatchDocument>("Match", matchSchema);
+export default model("Match", matchSchema);

@@ -1,6 +1,5 @@
 import { Hono } from "hono";
-import PlayerModel from "../models/Player.ts";
-import { Player } from "../types/Game.d.ts";
+import PlayerModel, { IPlayer } from "../models/Player.ts";
 const players = new Hono();
 
 // GET all players
@@ -18,8 +17,7 @@ players.get("/:id", async (c) => {
 
 // POST a new player
 players.post("/", async (c) => {
-  const body = await c.req.json<Player>();
-
+  const body = await c.req.json<IPlayer>();
   try {
     const newPlayer = await PlayerModel.create(body);
     return c.json(newPlayer);
