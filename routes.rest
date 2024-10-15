@@ -19,6 +19,16 @@ content-type: application/json
     "displayName": "jd001"
 }
 
+###
+
+PUT http://localhost:8000/players/<id> HTTP/1.1
+content-type: application/json
+
+{
+    "name": "<New Name>",
+    "displayName": "<New Display Name>"
+}
+
 ##### MATCHES #####
 
 GET http://localhost:8000/matches HTTP/1.1

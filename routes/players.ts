@@ -68,4 +68,20 @@ players.delete("/:id", async (c) => {
   return c.json(playerToDelete);
 });
 
+players.put("/:id", async (c) => {
+  const body = await c.req.json<IPlayer>();
+  const id = c.req.param("id");
+  let playerToUpdate;
+
+  try {
+    playerToUpdate = await PlayerModel.findByIdAndUpdate(id, body);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error);
+      return c.json({ error: error.message });
+    }
+  }
+  return c.json(playerToUpdate);
+});
+
 export default players;
