@@ -20,6 +20,10 @@ GET http://localhost:8000/matches HTTP/1.1
 
 ###
 
+GET http://localhost:8000/matches/<id> HTTP/1.1
+
+###
+
 POST http://localhost:8000/matches HTTP/1.1
 content-type: application/json
 
