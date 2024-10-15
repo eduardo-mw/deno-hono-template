@@ -52,5 +52,22 @@ matches.post("/", async (c) => {
   return c.json(newMatch);
 });
 
+matches.put("/:id", async (c) => {
+  const id = c.req.param("id");
+  const body = await c.req.json<IMatch>();
+  let matchToUpdate;
+
+  try {
+    matchToUpdate = await MatchModel.findByIdAndUpdate(id, body);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error);
+      return c.json({ error: error.message });
+    }
+  }
+
+  return c.json(matchToUpdate);
+});
+
 // Update a match
 export default matches;
