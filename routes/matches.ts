@@ -35,6 +35,22 @@ matches.get("/:id", async (c) => {
   return c.json(singleMatch);
 });
 
+matches.delete("/:id", async (c) => {
+  const id = c.req.param("id");
+  let matchToDelete;
+
+  try {
+    matchToDelete = await MatchModel.findByIdAndDelete(id);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error);
+      return c.json({ error: error.message });
+    }
+  }
+
+  return c.json(matchToDelete);
+});
+
 // Create a new match
 matches.post("/", async (c) => {
   const body = await c.req.json<IMatch>();
