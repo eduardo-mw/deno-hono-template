@@ -10,6 +10,7 @@ matches.get("/", async (c) => {
     allMatches = await MatchModel.find();
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error);
       return c.json({ error: error.message });
     }
   }
@@ -26,6 +27,7 @@ matches.get("/:id", async (c) => {
     singleMatch = await MatchModel.findById(id);
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error);
       return c.json({ error: error.message });
     }
   }
@@ -42,6 +44,7 @@ matches.post("/", async (c) => {
     newMatch = await MatchModel.create(body);
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error);
       return c.json({ error: error.message });
     }
   }

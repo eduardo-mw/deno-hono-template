@@ -4,29 +4,52 @@ const players = new Hono();
 
 // GET all players
 players.get("/", async (c) => {
-  const allPlayers = await PlayerModel.find();
+  let allPlayers;
+
+  try {
+    allPlayers = await PlayerModel.find();
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error);
+      return c.json({ error: error.message });
+    }
+  }
+
   return c.json(allPlayers);
 });
 
 // GET player by id
 players.get("/:id", async (c) => {
   const id = c.req.param("id");
-  const singlePlayer = await PlayerModel.findById(id);
-  return c.json(singlePlayer);
+  let singlePlayer;
+
+  try {
+    singlePlayer = await PlayerModel.findById(id);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error);
+      return c.json({ error: error.message });
+    }
+  }
+
+  return c.json({ singlePlayer });
 });
 
 // POST a new player
 players.post("/", async (c) => {
   const body = await c.req.json<IPlayer>();
+  let newPlayer;
+
   try {
-    const newPlayer = await PlayerModel.create(body);
-    return c.json(newPlayer);
+    newPlayer = await PlayerModel.create(body);
   } catch (error) {
     if (error instanceof Error) {
       console.error(error);
-      return c.json({ "error": error.message });
+      return c.json({ error: error.message });
     }
   }
+
+  return c.json(newPlayer);
 });
 
 export default players;
