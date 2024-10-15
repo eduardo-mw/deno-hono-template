@@ -1,8 +1,13 @@
+##### PLAYERS #####
 GET http://localhost:8000/players HTTP/1.1
 
 ###
 
 GET http://localhost:8000/players/<id> HTTP/1.1
+
+###
+
+DELETE http://localhost:8000/players/<id> HTTP/1.1
 
 ###
 
@@ -14,7 +19,7 @@ content-type: application/json
     "displayName": "jd001"
 }
 
-###
+##### MATCHES #####
 
 GET http://localhost:8000/matches HTTP/1.1
 

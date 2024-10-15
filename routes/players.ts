@@ -52,4 +52,20 @@ players.post("/", async (c) => {
   return c.json(newPlayer);
 });
 
+players.delete("/:id", async (c) => {
+  const id = c.req.param("id");
+  let playerToDelete;
+
+  try {
+    playerToDelete = await PlayerModel.findByIdAndDelete(id);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error);
+      return c.json({ error: error.message });
+    }
+  }
+
+  return c.json(playerToDelete);
+});
+
 export default players;
